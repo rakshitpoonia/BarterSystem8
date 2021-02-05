@@ -19,7 +19,7 @@ export default class NotificationScreen extends Component{
   }
 
   getNotifications=()=>{
-    this.requestRef = db.collection("all_notifications")
+    this.notificationRef = db.collection("all_notifications")
     .where("notification_status", "==", "unread")
     .where("targeted_user_id",'==',this.state.userId)
     .onSnapshot((snapshot)=>{
@@ -40,7 +40,7 @@ export default class NotificationScreen extends Component{
   }
 
   componentWillUnmount(){
-    notificationRef()
+    this.notificationRef()
   }
 
   keyExtractor = (item, index) => index.toString()
@@ -63,7 +63,7 @@ export default class NotificationScreen extends Component{
     return(
       <View style={styles.container}>
         <View style={{flex:0.1}}>
-          <MyHeader title={"Notifications"} navigation={this.props.navigation}/>
+          <MyHeader title="Notifications" navigation={this.props.navigation}/>
         </View>
         <View style={{flex:0.9}}>
           {
